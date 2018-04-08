@@ -52,7 +52,7 @@ writeLines(readLines("linOdds.stan"))
 ```
 ###Fitting model in stan
 ```{r,results='hide',warning=FALSE, message=FALSE}
-fit <- stan("S:/sareku/DATAs/RStan/linearExcess risk model/linOdds.stan",
+fit <- stan("linOdds.stan",
             data=dat, control = list(adapt_delta=0.99, max_treedepth=14))
 ```
 ###Examining results
