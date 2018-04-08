@@ -1,0 +1,18 @@
+data{
+  one <- 1
+}
+model{
+  for(i in 1:N){
+    odds[i] <- exp(b0)*(1 + b1*A[i] + b2*B[i] + b3*A[i]*B[i])
+    pp[i] <- odds[i]/(1+odds[i])
+    y[i] ~ dbern(pp[i])
+  }
+  b0 ~ dnorm(0,0.04)
+  b1 ~ dnorm(0,0.04)
+  b2 ~ dnorm(0,0.04)
+  b3 ~ dnorm(0,0.04)
+  
+  #Ensuring approproate constrains for b1,b2,b3
+  one ~ dbern(CI)
+  CI <- step(1+b1)*step(1+b2)*step(1+b1+b2+b3)
+}
